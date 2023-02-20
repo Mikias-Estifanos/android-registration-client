@@ -6,7 +6,7 @@ buildscript {
         maven { url "https://plugins.gradle.org/m2/" }
     }
     dependencies {
-        classpath 'com.android.tools.build:gradle:7.0.3'
+        classpath 'com.android.tools.build:gradle:7.2.2'
         classpath "com.ibotta:plugin:1.2.0"
         //Jacoco Plugin
         classpath "org.jacoco:org.jacoco.core:0.8.7"
