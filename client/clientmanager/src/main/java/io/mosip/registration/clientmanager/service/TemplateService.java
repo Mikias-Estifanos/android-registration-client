@@ -1,5 +1,6 @@
 package io.mosip.registration.clientmanager.service;
 
+//import android.app.Application;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
@@ -31,6 +32,7 @@ import java.util.stream.Collectors;
 
 import javax.inject.Singleton;
 
+
 import io.mosip.registration.clientmanager.R;
 import io.mosip.registration.clientmanager.constant.Modality;
 import io.mosip.registration.clientmanager.dto.registration.BiometricsDto;
@@ -50,12 +52,15 @@ public class TemplateService {
 
     private Context appContext;
 
+    //Application application;
+
     MasterDataService masterDataService;
 
     IdentitySchemaRepository identitySchemaRepository;
 
     public TemplateService(Context appContext, MasterDataService masterDataService, IdentitySchemaRepository identitySchemaRepository){
         this.appContext = appContext;
+        //this.appContext = application.getApplicationContext();
         this.masterDataService = masterDataService;
         this.identitySchemaRepository = identitySchemaRepository;
     }
@@ -117,8 +122,13 @@ public class TemplateService {
 
     private Map<String, Object> getBiometricData(FieldSpecDto field, RegistrationDto registrationDto, boolean isPreview, VelocityContext velocityContext) throws Exception {
         velocityContext.put("Fingers", appContext.getString(R.string.fingers));
+        //velocityContext.put("Fingers", appContext.getString(R.string.app_name));
         velocityContext.put("Iris", appContext.getString(R.string.double_iris));
+        //velocityContext.put("Iris", appContext.getString(R.string.app_name));
         velocityContext.put("Face", appContext.getString(R.string.face_label));
+        //velocityContext.put("Face", appContext.getString(R.string.app_name));
+        //velocityContext.put("Face", appContext.getString(R.string.app_name));
+
 
         Map<String, Object> bioData = new HashMap<>();
 
