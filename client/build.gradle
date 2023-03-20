@@ -29,9 +29,9 @@ ext {
     clientmanagerLibVersionCode = 1
     clientmanagerLibVersionName = "\"1.0.0\""
 
-    //serverBaseURL = "\"https://api-internal.dev.fayda.et\""
+    serverBaseURL = "\"https://api-internal.dev.fayda.et\""
     //serverBaseURL = "\"https://dev2.fayda.et\""
-    serverBaseURL= "\"https://fayda.et\""
+    //serverBaseURL= "\"https://fayda.et\""
 }
 
 task cleanOutputDir(type: Delete) {
