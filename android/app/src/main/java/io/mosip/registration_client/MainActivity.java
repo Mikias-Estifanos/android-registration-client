@@ -151,6 +151,9 @@ public class MainActivity extends FlutterActivity {
                                     String key=call.argument("key");
                                     getStringValueGlobalParam(key,result);
                                     break;
+                                case "logout":
+                                    new LoginActivityService().logout(loginService);
+                                    break;
 
                                 default:
                                     result.notImplemented();

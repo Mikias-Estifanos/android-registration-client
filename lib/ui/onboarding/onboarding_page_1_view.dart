@@ -8,6 +8,7 @@ import 'package:registration_client/ui/onboarding/widgets/onboarding_page_1_card
 import 'package:registration_client/utils/app_config.dart';
 import 'package:responsive_grid_list/responsive_grid_list.dart';
 import 'package:url_launcher/url_launcher.dart';
+import 'package:flutter_gen/gen_l10n/app_localizations.dart';
 
 import '../../utils/responsive.dart';
 

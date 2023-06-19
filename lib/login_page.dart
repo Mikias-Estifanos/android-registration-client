@@ -203,17 +203,17 @@ class _LoginPageState extends State<LoginPage> {
       mp = {};
       userMap = {};
     }
-    
+    print("----------------------------$mp");
+
     setState(() {
-      setState(() {
-        isUserValidated = mp['isUserPresent'];
-        if (isUserValidated) {
-          loginResponse = AppLocalizations.of(context)!.user_validated;
-        } else {
-          loginResponse = AppLocalizations.of(context)!.username_incorrect;
-        }
-      });
+      isUserValidated = mp['isUserPresent'];
+      if (isUserValidated) {
+        loginResponse = AppLocalizations.of(context)!.user_validated;
+      } else {
+        loginResponse = AppLocalizations.of(context)!.username_incorrect;
+      }
     });
+
     return {
       "name": userMap.isEmpty ? "" : userMap["id"].toString(),
       // mp["user_details"].toString().split("id=").last.split(",").first,

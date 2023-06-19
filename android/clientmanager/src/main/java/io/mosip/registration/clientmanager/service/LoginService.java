@@ -21,9 +21,11 @@ import java.util.List;
 
 import javax.inject.Inject;
 import javax.inject.Singleton;
+import java.util.logging.Logger;
 
 @Singleton
 public class LoginService {
+    private static final Logger LOGGER = Logger.getLogger(LoginService.class.getName());
 
     private static final String TAG = LoginService.class.getSimpleName();
 
@@ -80,5 +82,16 @@ public class LoginService {
             Log.e(TAG, ex.getMessage(), ex);
             throw ex;
         }
+    }
+    public void clearAuthToken(){
+        try{
+            String AuthTokenReturned=this.sessionManager.clearAuthToken();
+            LOGGER.info("Auth Token is cleared and its value is "+AuthTokenReturned);
+        }catch (Exception ex) {
+            Log.e(TAG, ex.getMessage(), ex);
+            throw ex;
+        }
+
+
     }
 }

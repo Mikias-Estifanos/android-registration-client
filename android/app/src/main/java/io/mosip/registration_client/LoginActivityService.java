@@ -226,4 +226,8 @@ public class LoginActivityService {
             result.error("VALIDATION_FAILED","User validation failed!", null);
         }
     }
+    void logout(LoginService loginService){
+        loginService.clearAuthToken();
+
+    }
 }
