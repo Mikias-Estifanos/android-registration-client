@@ -95,6 +95,10 @@ public class MainActivity extends FlutterActivity {
 
     @Inject
     ProcessSpecDetailsApi processSpecDetailsApi;
+    
+    @Inject
+    DocumentDetailsApi documentDetailsApi;
+
 
 
     @Override

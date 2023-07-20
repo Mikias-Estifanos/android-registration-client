@@ -11,15 +11,17 @@
 NS_ASSUME_NONNULL_BEGIN
 
 
-/// The codec used by ProcessSpecApi.
-NSObject<FlutterMessageCodec> *ProcessSpecApiGetCodec(void);
+/// The codec used by DocumentApi.
+NSObject<FlutterMessageCodec> *DocumentApiGetCodec(void);
 
-@protocol ProcessSpecApi
-- (void)getUISchemaWithCompletion:(void (^)(NSString *_Nullable, FlutterError *_Nullable))completion;
-- (void)getStringValueGlobalParamKey:(NSString *)key completion:(void (^)(NSString *_Nullable, FlutterError *_Nullable))completion;
-- (void)getNewProcessSpecWithCompletion:(void (^)(NSArray<NSString *> *_Nullable, FlutterError *_Nullable))completion;
+@protocol DocumentApi
+- (void)addDocumentFieldId:(NSString *)fieldId docType:(NSString *)docType reference:(NSString *)reference bytes:(NSArray<NSString *> *)bytes completion:(void (^)(FlutterError *_Nullable))completion;
+- (void)removeDocumentFieldId:(NSString *)fieldId pageIndex:(NSNumber *)pageIndex completion:(void (^)(FlutterError *_Nullable))completion;
+- (void)getScannedPagesFieldId:(NSString *)fieldId completion:(void (^)(NSArray<NSString *> *_Nullable, FlutterError *_Nullable))completion;
+- (void)hasDocumentFieldId:(NSString *)fieldId completion:(void (^)(NSNumber *_Nullable, FlutterError *_Nullable))completion;
+- (void)removeDocumentFieldFieldId:(NSString *)fieldId completion:(void (^)(FlutterError *_Nullable))completion;
 @end
 
-extern void ProcessSpecApiSetup(id<FlutterBinaryMessenger> binaryMessenger, NSObject<ProcessSpecApi> *_Nullable api);
+extern void DocumentApiSetup(id<FlutterBinaryMessenger> binaryMessenger, NSObject<DocumentApi> *_Nullable api);
 
 NS_ASSUME_NONNULL_END

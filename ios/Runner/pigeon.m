@@ -21,42 +21,67 @@ static id GetNullableObjectAtIndex(NSArray *array, NSInteger key) {
   return (result == [NSNull null]) ? nil : result;
 }
 
-NSObject<FlutterMessageCodec> *ProcessSpecApiGetCodec(void) {
+NSObject<FlutterMessageCodec> *DocumentApiGetCodec(void) {
   static FlutterStandardMessageCodec *sSharedObject = nil;
   sSharedObject = [FlutterStandardMessageCodec sharedInstance];
   return sSharedObject;
 }
 
-void ProcessSpecApiSetup(id<FlutterBinaryMessenger> binaryMessenger, NSObject<ProcessSpecApi> *api) {
+void DocumentApiSetup(id<FlutterBinaryMessenger> binaryMessenger, NSObject<DocumentApi> *api) {
   {
     FlutterBasicMessageChannel *channel =
       [[FlutterBasicMessageChannel alloc]
-        initWithName:@"dev.flutter.pigeon.ProcessSpecApi.getUISchema"
+        initWithName:@"dev.flutter.pigeon.DocumentApi.addDocument"
         binaryMessenger:binaryMessenger
-        codec:ProcessSpecApiGetCodec()];
+        codec:DocumentApiGetCodec()];
     if (api) {
-      NSCAssert([api respondsToSelector:@selector(getUISchemaWithCompletion:)], @"ProcessSpecApi api (%@) doesn't respond to @selector(getUISchemaWithCompletion:)", api);
-      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        [api getUISchemaWithCompletion:^(NSString *_Nullable output, FlutterError *_Nullable error) {
-          callback(wrapResult(output, error));
-        }];
-      }];
-    } else {
-      [channel setMessageHandler:nil];
-    }
-  }
-  {
-    FlutterBasicMessageChannel *channel =
-      [[FlutterBasicMessageChannel alloc]
-        initWithName:@"dev.flutter.pigeon.ProcessSpecApi.getStringValueGlobalParam"
-        binaryMessenger:binaryMessenger
-        codec:ProcessSpecApiGetCodec()];
-    if (api) {
-      NSCAssert([api respondsToSelector:@selector(getStringValueGlobalParamKey:completion:)], @"ProcessSpecApi api (%@) doesn't respond to @selector(getStringValueGlobalParamKey:completion:)", api);
+      NSCAssert([api respondsToSelector:@selector(addDocumentFieldId:docType:reference:bytes:completion:)], @"DocumentApi api (%@) doesn't respond to @selector(addDocumentFieldId:docType:reference:bytes:completion:)", api);
       [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
         NSArray *args = message;
-        NSString *arg_key = GetNullableObjectAtIndex(args, 0);
-        [api getStringValueGlobalParamKey:arg_key completion:^(NSString *_Nullable output, FlutterError *_Nullable error) {
+        NSString *arg_fieldId = GetNullableObjectAtIndex(args, 0);
+        NSString *arg_docType = GetNullableObjectAtIndex(args, 1);
+        NSString *arg_reference = GetNullableObjectAtIndex(args, 2);
+        NSArray<NSString *> *arg_bytes = GetNullableObjectAtIndex(args, 3);
+        [api addDocumentFieldId:arg_fieldId docType:arg_docType reference:arg_reference bytes:arg_bytes completion:^(FlutterError *_Nullable error) {
+          callback(wrapResult(nil, error));
+        }];
+      }];
+    } else {
+      [channel setMessageHandler:nil];
+    }
+  }
+  {
+    FlutterBasicMessageChannel *channel =
+      [[FlutterBasicMessageChannel alloc]
+        initWithName:@"dev.flutter.pigeon.DocumentApi.removeDocument"
+        binaryMessenger:binaryMessenger
+        codec:DocumentApiGetCodec()];
+    if (api) {
+      NSCAssert([api respondsToSelector:@selector(removeDocumentFieldId:pageIndex:completion:)], @"DocumentApi api (%@) doesn't respond to @selector(removeDocumentFieldId:pageIndex:completion:)", api);
+      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
+        NSArray *args = message;
+        NSString *arg_fieldId = GetNullableObjectAtIndex(args, 0);
+        NSNumber *arg_pageIndex = GetNullableObjectAtIndex(args, 1);
+        [api removeDocumentFieldId:arg_fieldId pageIndex:arg_pageIndex completion:^(FlutterError *_Nullable error) {
+          callback(wrapResult(nil, error));
+        }];
+      }];
+    } else {
+      [channel setMessageHandler:nil];
+    }
+  }
+  {
+    FlutterBasicMessageChannel *channel =
+      [[FlutterBasicMessageChannel alloc]
+        initWithName:@"dev.flutter.pigeon.DocumentApi.getScannedPages"
+        binaryMessenger:binaryMessenger
+        codec:DocumentApiGetCodec()];
+    if (api) {
+      NSCAssert([api respondsToSelector:@selector(getScannedPagesFieldId:completion:)], @"DocumentApi api (%@) doesn't respond to @selector(getScannedPagesFieldId:completion:)", api);
+      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
+        NSArray *args = message;
+        NSString *arg_fieldId = GetNullableObjectAtIndex(args, 0);
+        [api getScannedPagesFieldId:arg_fieldId completion:^(NSArray<NSString *> *_Nullable output, FlutterError *_Nullable error) {
           callback(wrapResult(output, error));
         }];
       }];
@@ -67,14 +92,35 @@ void ProcessSpecApiSetup(id<FlutterBinaryMessenger> binaryMessenger, NSObject<Pr
   {
     FlutterBasicMessageChannel *channel =
       [[FlutterBasicMessageChannel alloc]
-        initWithName:@"dev.flutter.pigeon.ProcessSpecApi.getNewProcessSpec"
+        initWithName:@"dev.flutter.pigeon.DocumentApi.hasDocument"
         binaryMessenger:binaryMessenger
-        codec:ProcessSpecApiGetCodec()];
+        codec:DocumentApiGetCodec()];
     if (api) {
-      NSCAssert([api respondsToSelector:@selector(getNewProcessSpecWithCompletion:)], @"ProcessSpecApi api (%@) doesn't respond to @selector(getNewProcessSpecWithCompletion:)", api);
+      NSCAssert([api respondsToSelector:@selector(hasDocumentFieldId:completion:)], @"DocumentApi api (%@) doesn't respond to @selector(hasDocumentFieldId:completion:)", api);
       [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
-        [api getNewProcessSpecWithCompletion:^(NSArray<NSString *> *_Nullable output, FlutterError *_Nullable error) {
+        NSArray *args = message;
+        NSString *arg_fieldId = GetNullableObjectAtIndex(args, 0);
+        [api hasDocumentFieldId:arg_fieldId completion:^(NSNumber *_Nullable output, FlutterError *_Nullable error) {
           callback(wrapResult(output, error));
+        }];
+      }];
+    } else {
+      [channel setMessageHandler:nil];
+    }
+  }
+  {
+    FlutterBasicMessageChannel *channel =
+      [[FlutterBasicMessageChannel alloc]
+        initWithName:@"dev.flutter.pigeon.DocumentApi.removeDocumentField"
+        binaryMessenger:binaryMessenger
+        codec:DocumentApiGetCodec()];
+    if (api) {
+      NSCAssert([api respondsToSelector:@selector(removeDocumentFieldFieldId:completion:)], @"DocumentApi api (%@) doesn't respond to @selector(removeDocumentFieldFieldId:completion:)", api);
+      [channel setMessageHandler:^(id _Nullable message, FlutterReply callback) {
+        NSArray *args = message;
+        NSString *arg_fieldId = GetNullableObjectAtIndex(args, 0);
+        [api removeDocumentFieldFieldId:arg_fieldId completion:^(FlutterError *_Nullable error) {
+          callback(wrapResult(nil, error));
         }];
       }];
     } else {

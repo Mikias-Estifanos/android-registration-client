@@ -87,5 +87,10 @@ public class HostApiModule {
                         globalParamRepository);
 
     }
+    @Provides
+    @Singleton
+    DocumentDetailsApi getDocumentDetailsApi(RegistrationService registrationService) {
+        return new DocumentDetailsApi(registrationService);
+    }
 
 }
